@@ -11,7 +11,7 @@ const Upload = () => {
 
   const form = useForm({
     defaultValues: {
-      file: "",
+      image: "",
       description: ""
     },
     mode: "onBlur"
@@ -20,18 +20,43 @@ const Upload = () => {
   const {errors, isSubmitSuccessful, isSubmitted, isSubmitting} = formState
 
 
-  const subitImageFileHandler = (data) => {
-    console.log(data);
+  const subitImageFileHandler = async (data) => {
+    // console.log(data);
+    const formData =  new FormData();
+
+    console.log(formData)
+    await formData.append("image", data.image)
+    await formData.append("description", data.description)
+    console.log(formData)
+   
+    try {
+      const response = await fetch("https://sun-gas.onrender.com/api/upload", {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+       
+      })
+      console.log(response)
+      if (!response.ok) {
+        throw new Error("Something went wrong")
+      }
+      console.log(formData)
+    } catch(error) {
+      console.log(error)
+    }
+
     router.push("/media")
   };
   return (
     <Box width={"90%"} maxW={"45rem"} margin={"5rem auto"}>
-        <form onSubmit={handleSubmit(subitImageFileHandler)}>
+        <form encType="multipart/form-data" onSubmit={handleSubmit(subitImageFileHandler)}>
             <Stack spacing={3} display={"flex"} flexDir={"column"} alignItems={"center"} justifyContent={"center"}>
             <FormControl display={"flex"} flexDir={"column"} width={"100%"} marginTop={"1.7rem"}>
-                <FormLabel htmlFor='file'>Select Image</FormLabel>
-                <Input type="file" id="file" placeholder='Select an Image to uplad' 
-                {...register("file", {
+                <FormLabel htmlFor='image'>Select Image</FormLabel>
+                <Input type="file" id="image" placeholder='Select an Image to upload' 
+                {...register("image", {
                   required: {
                     value: true,
                     message: "Select valid image file"
@@ -43,7 +68,7 @@ const Upload = () => {
                   <p style={{color: "Green"}}>Uploading Successfully!</p>
                 )}
                 {isSubmitting && <p style={{color: "Green"}}>Uploading...</p>}
-                {errors && !isSubmitSuccessful && <p style={{color: "red"}}>{errors.file?.message}</p>}
+                {errors && !isSubmitSuccessful && <p style={{color: "red"}}>{errors.image?.message}</p>}
             </FormControl>
 
             <FormControl display={"flex"} flexDir={"column"} width={"100%"} marginTop={"1.7rem"}>

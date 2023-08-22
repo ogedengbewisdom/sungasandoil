@@ -11,7 +11,7 @@ const AuthForm = () => {
 
   const form = useForm({
     defaultValues: {
-      adminId: "",
+      username: "",
       password: ""
     },
     mode: "onBlur"
@@ -19,8 +19,28 @@ const AuthForm = () => {
   const {register, formState, handleSubmit, reset} = form;
   const {errors, isSubmitted, isSubmitSuccessful} = formState;
 
-  const submitAuthenticationHandler = (data) => {
+  const submitAuthenticationHandler = async(data) => {
     // console.log(data)
+   
+    try {
+      const response = await fetch("https://sun-gas.onrender.com/api/login", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        },
+      })
+      console.log(response)
+      if (!response.ok) {
+        throw new Error("Something went wrong")
+      }
+      // const data = await response.json()
+      // console.log(data)
+    } catch(error) {
+      console.log(error.message)
+    }
+
+
     router.push("/upload")
 
   }
@@ -38,15 +58,15 @@ const AuthForm = () => {
             <Stack spacing={3} display={"flex"} flexDir={"column"} alignItems={"center"} justifyContent={"center"}>
             <FormControl display={"flex"} flexDir={"column"} width={"100%"} marginTop={"1.7rem"}>
                 <FormLabel htmlFor='name'>User name</FormLabel>
-                <Input  type="text" id="adminId" placeholder="Enter Admin ID" 
-                {...register("adminId", {
+                <Input  type="text" id="username" placeholder="Enter Admin ID" 
+                {...register("username", {
                   required: {
                     value: true,
                     message: "Enter a valid Admin Id!"
                   }
                 })} 
                 />
-                {errors &&<p style={{color: "red"}}>{errors.adminId?.message}</p>}
+                {errors &&<p style={{color: "red"}}>{errors.username?.message}</p>}
             </FormControl>
 
             <FormControl display={"flex"} flexDir={"column"} width={"100%"} marginTop={"1.7rem"}>
