@@ -46,8 +46,10 @@ const homeHandler = () => {
     animate={{opacity: 1, y: 0}}
     exit={{opacity: 0, y: 15}}
     transition={{delay: 0.08, duration: 0.3}}>
-    <Box as="header" display={"flex"} alignItems={"center"} justifyContent={"space-between"} margin={{base: "1.06rem 1.31rem", md: "3rem", lg: "2rem 9.34rem "}} >
-            <Image onClick={homeHandler} src="/icons/logo.png" alt="sun oil & gas" width={"100"} height={"150"} w={{base: "5rem", md: "8rem"}} h={{base: "6rem", md: "10rem"}} />
+    <Box as="header" display={"flex"} alignItems={"center"} justifyContent={"space-between"} margin={{base: "1.06rem 1.31rem", md: "2rem", lg: "2rem 5.34rem "}} >
+      <Box maxH={"10rem"} maxW={"3rem"}>
+            <Image onClick={homeHandler} src="/icons/logo.png" alt="sun oil & gas" width={"50"} height={"50"} w={{base: "5rem"}} h={{base: "6rem"}} />
+            </Box>
             {!showinMedia && <Box display={{base: "none", md: "flex"}} flexDirection={{base: "column", medium: "row"}}>
                 <Link href="/#aboutus" style={{margin: "0 1.5rem 0 0", fontSize: "1.4rem", fontWeight: "600", color:"#000"}}>About us</Link>
                 <Link href="/#contact" style={{margin: "0 1.5rem", fontSize: "1.4rem", fontWeight: "600", color:"#000"}}>Contact</Link>

@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Roboto:wght@300&family=Urbanist:wght@600&display=swap');
+@font-face {
+    font-family: "Clash Display";
+    src: url(/clash.ttf);
+}
+
+
+.imgs {
+    display: none;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.list {
+    display: flex;
+    list-style: none;
+}
+
+.list li {
+    margin: 0 0.2rem;
+}
+
+.list li a {
+    text-decoration: none;
+    font-family: "Urbanist";
+    font-weight: 600;
+    font-size: 1.2rem;
+    font-style: normal;
+    color: #111010;
+    line-height: normal;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 767px) {
+    .imgs {
+        display: block;
+    }
+    
+}

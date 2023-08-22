@@ -20,35 +20,60 @@ const Upload = () => {
   const {errors, isSubmitSuccessful, isSubmitted, isSubmitting} = formState
 
 
-  const subitImageFileHandler = async (data) => {
-    // console.log(data);
-    const formData =  new FormData();
-
-    console.log(formData)
-    await formData.append("image", data.image)
-    await formData.append("description", data.description)
-    console.log(formData)
+  // const subitImageFileHandler = async (data) => {
+  //   // console.log(data);
+  //   const formData = new FormData();
+  //   formData.append("image", data.image[0])
+  //   formData.append("description", data.description)
+  //   console.log(formData)
    
+  //   try {
+  //     const response = await fetch("https://sun-gas.onrender.com/api/upload", {
+  //       method: "POST",
+  //       body: formData,
+       
+  //     })
+  //     console.log(response)
+  //     if (!response.ok) {
+  //       throw new Error("Something went wrong")
+  //     }
+  //     console.log(formData)
+  //   } catch(error) {
+  //     console.log(error)
+  //   }
+
+  //   router.push("/media")
+  // };
+
+  const subitImageFileHandler = async (data) => {
+    // setIsUploading(true);
+
+    const formData = new FormData();
+    console.log("Form", formData);
+    formData.append("image", data.image[0]); // Using data.image[0] for file
+    formData.append("description", data.description);
+    console.log("checkout",formData)
     try {
       const response = await fetch("https://sun-gas.onrender.com/api/upload", {
         method: "POST",
         body: formData,
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-       
-      })
-      console.log(response)
+      });
+
       if (!response.ok) {
-        throw new Error("Something went wrong")
+        throw new Error("Something went wrong");
       }
-      console.log(formData)
-    } catch(error) {
-      console.log(error)
+
+      // setResponseMessage("Upload successful");
+      // reset(); // Reset the form
+    } catch (error) {
+      console.log(error);
+      // setResponseMessage("Upload failed");
     }
 
-    router.push("/media")
+    // setIsUploading(false);
+    // router.push("/media");
   };
+
   return (
     <Box width={"90%"} maxW={"45rem"} margin={"5rem auto"}>
         <form encType="multipart/form-data" onSubmit={handleSubmit(subitImageFileHandler)}>

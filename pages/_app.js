@@ -3,6 +3,7 @@ import {ChakraProvider} from "@chakra-ui/react";
 import { extendTheme } from '@chakra-ui/react'
 
 
+
 export default function App({ Component, pageProps }) {
 
   const fonts = {
@@ -13,7 +14,7 @@ export default function App({ Component, pageProps }) {
   }
 
   const theme = extendTheme({fonts})
-  return <ChakraProvider theme={theme} >
+  return <ChakraProvider >
     <Header />
     <Component {...pageProps} />
     </ChakraProvider>
