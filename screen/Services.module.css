@@ -1,0 +1,42 @@
+
+.svg1 {
+    position: absolute;
+    bottom: 0;
+    right: 590px;
+    width: 6.875rem;
+    height: 7.125rem;
+    fill: rgba(171, 171, 188, 0.35);
+    z-index: -2;
+}
+
+.svg2 {
+    position: absolute;
+    top: 2px;
+    right: 6px;
+    width: 4.6875rem;
+    height: 4.8125rem;
+    fill: rgba(171, 171, 188, 0.35);
+    z-index: -1;
+}
+
+@media screen and (min-width: 320px) {
+    .svg2 {
+        position: absolute;
+        top: -10px;
+        right: 100px;
+        width: 4.6875rem;
+        height: 4.8125rem;
+        fill: rgba(171, 171, 188, 0.35);
+        z-index: -1;
+    }
+
+    .svg1 {
+        position: absolute;
+        top: -52px;
+        right: 20px;
+        width: 6.875rem;
+        height: 7.125rem;
+        fill: rgba(171, 171, 188, 0.35);
+        z-index: -1;
+    }
+  }
