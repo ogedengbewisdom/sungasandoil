@@ -1,13 +1,15 @@
 
 
+import { worksActions } from '@/store/workslice';
 import { Box, FormControl, FormLabel, Input, Stack, Textarea, Button } from '@chakra-ui/react'
 import { useRouter } from 'next/router';
 import React from 'react';
 import {useForm} from "react-hook-form";
+import { useDispatch } from 'react-redux';
 
 const Upload = () => {
-
-  const router = useRouter()
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const form = useForm({
     defaultValues: {
@@ -19,36 +21,55 @@ const Upload = () => {
   const {register, formState, handleSubmit, reset} = form;
   const {errors, isSubmitSuccessful, isSubmitted, isSubmitting} = formState
 
-
   const subitImageFileHandler = async (data) => {
-    // console.log(data);
-    const formData =  new FormData();
-
-    console.log(formData)
-    await formData.append("image", data.image)
-    await formData.append("description", data.description)
-    console.log(formData)
-   
+    
+    dispatch(worksActions.showNotification({
+      title: "Uploading...",
+      status: "pending",
+      message: "uploading images please wait"
+    }))
+    const formData = new FormData();
+    console.log("Form", formData);
+    formData.append("image", data.image[0]); 
+    formData.append("description", data.description);
+    console.log("checkout",formData)
     try {
       const response = await fetch("https://sun-gas.onrender.com/api/upload", {
         method: "POST",
         body: formData,
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-       
-      })
-      console.log(response)
+      });
+
       if (!response.ok) {
-        throw new Error("Something went wrong")
+        throw new Error("Something went wrong");
       }
-      console.log(formData)
-    } catch(error) {
-      console.log(error)
+
+      dispatch(worksActions.showNotification({
+        title: "Uploaded",
+        status: "success",
+        message: "image uploaded successfully"
+      }))
+      setTimeout(() => {
+        dispatch(worksActions.clearNotification()) 
+      }, 5000)
+
+  
+      reset(); 
+    } catch (error) {
+      dispatch(worksActions.showNotification({
+        title: "Failed",
+        status: "error",
+        message: "An error occured please try again"
+      }))
+      setTimeout(() => {
+        dispatch(worksActions.clearNotification()) 
+      }, 5000)
+      
     }
 
-    router.push("/media")
+  
+    // router.push("/media");
   };
+
   return (
     <Box width={"90%"} maxW={"45rem"} margin={"5rem auto"}>
         <form encType="multipart/form-data" onSubmit={handleSubmit(subitImageFileHandler)}>

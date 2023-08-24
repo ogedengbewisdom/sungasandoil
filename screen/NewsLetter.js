@@ -1,8 +1,12 @@
 import React from 'react'
 import {Box, FormControl, Input, Textarea, Button, Stack, Heading} from "@chakra-ui/react"
 import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import { worksActions } from '@/store/workslice'
 
 const NewsLetter = () => {
+
+  const dispatch = useDispatch();
 
     const form = useForm({
         defaultValues: {
@@ -14,6 +18,12 @@ const NewsLetter = () => {
     const {register, handleSubmit} = form;
     
     const submiHandler = async (data) => {
+      dispatch(worksActions.showNotification({
+        title: "Sending...",
+        status: "pending",
+        message: "Please wait sending email"
+      }))
+      
         try {
             const response = await fetch("https://sun-gas.onrender.com/api/contact", {
               method: "POST",
@@ -22,13 +32,25 @@ const NewsLetter = () => {
                 "Content-Type": "application/json"
               },
             })
-            console.log(response)
+            
             if (!response.ok) {
               throw new Error("Something went wrong")
             }
-            
+            dispatch(worksActions.showNotification({
+              title: "Sent",
+              status: "success",
+              message: "Email sent successfully"
+            }))
+            setTimeout(() => {
+              dispatch(worksActions.clearNotification()) // Clear the notification after 5 seconds
+            }, 5000)
+  
           } catch(error) {
-            console.log(error.message)
+            dispatch(worksActions.showNotification({
+              title: "Failed",
+              status: "error",
+              message: "Failed to send email try again later"
+            }))
           }
       
       
@@ -65,7 +87,7 @@ const NewsLetter = () => {
                   }
                 })} />
             </FormControl>
-            <Button type='submit' cursor={"pointer"} background={"black"}  _hover={{ bg: 'gainsboro', color: "black" }} boxShadow={"0px 2px 7px 0px rgba(5, 50, 131, 0.52)"} color={"rgba(255, 255, 255, 1)"} padding={{base: "0.4rem 1rem", md: "0.7rem 3rem"}} borderRadius={"0.25rem"}>Upload</Button>
+            <Button type='submit' cursor={"pointer"} background={"black"}  _hover={{ bg: 'gainsboro', color: "black" }} boxShadow={"0px 2px 7px 0px rgba(5, 50, 131, 0.52)"} color={"rgba(255, 255, 255, 1)"} padding={{base: "0.4rem 1rem", md: "0.7rem 3rem"}} borderRadius={"0.25rem"}>Submit</Button>
             </Stack>
         </form>
     </Box>
