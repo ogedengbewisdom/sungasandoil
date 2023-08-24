@@ -1,13 +1,15 @@
 
 
+import { worksActions } from '@/store/workslice';
 import { Box, FormControl, FormLabel, Input, Stack, Textarea, Button } from '@chakra-ui/react'
 import { useRouter } from 'next/router';
 import React from 'react';
 import {useForm} from "react-hook-form";
+import { useDispatch } from 'react-redux';
 
 const Upload = () => {
-
-  const router = useRouter()
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const form = useForm({
     defaultValues: {
@@ -19,38 +21,16 @@ const Upload = () => {
   const {register, formState, handleSubmit, reset} = form;
   const {errors, isSubmitSuccessful, isSubmitted, isSubmitting} = formState
 
-
-  // const subitImageFileHandler = async (data) => {
-  //   // console.log(data);
-  //   const formData = new FormData();
-  //   formData.append("image", data.image[0])
-  //   formData.append("description", data.description)
-  //   console.log(formData)
-   
-  //   try {
-  //     const response = await fetch("https://sun-gas.onrender.com/api/upload", {
-  //       method: "POST",
-  //       body: formData,
-       
-  //     })
-  //     console.log(response)
-  //     if (!response.ok) {
-  //       throw new Error("Something went wrong")
-  //     }
-  //     console.log(formData)
-  //   } catch(error) {
-  //     console.log(error)
-  //   }
-
-  //   router.push("/media")
-  // };
-
   const subitImageFileHandler = async (data) => {
-    // setIsUploading(true);
-
+    
+    dispatch(worksActions.showNotification({
+      title: "Uploading...",
+      status: "pending",
+      message: "uploading images please wait"
+    }))
     const formData = new FormData();
     console.log("Form", formData);
-    formData.append("image", data.image[0]); // Using data.image[0] for file
+    formData.append("image", data.image[0]); 
     formData.append("description", data.description);
     console.log("checkout",formData)
     try {
@@ -63,14 +43,30 @@ const Upload = () => {
         throw new Error("Something went wrong");
       }
 
-      // setResponseMessage("Upload successful");
-      // reset(); // Reset the form
+      dispatch(worksActions.showNotification({
+        title: "Uploaded",
+        status: "success",
+        message: "image uploaded successfully"
+      }))
+      setTimeout(() => {
+        dispatch(worksActions.clearNotification()) 
+      }, 5000)
+
+  
+      reset(); 
     } catch (error) {
-      console.log(error);
-      // setResponseMessage("Upload failed");
+      dispatch(worksActions.showNotification({
+        title: "Failed",
+        status: "error",
+        message: "An error occured please try again"
+      }))
+      setTimeout(() => {
+        dispatch(worksActions.clearNotification()) 
+      }, 5000)
+      
     }
 
-    // setIsUploading(false);
+  
     // router.push("/media");
   };
 

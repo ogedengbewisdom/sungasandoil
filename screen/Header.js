@@ -4,9 +4,16 @@ import {Box, Text, Button, chakra, List, ListItem, Image} from "@chakra-ui/react
 import {motion, AnimatePresence} from "framer-motion"
 import { useRouter } from 'next/router';
 import { Link } from '@chakra-ui/next-js';
+import { useSelector, useDispatch } from 'react-redux';
+import { worksActions } from '@/store/workslice';
+import Notification from './Notification';
+import { CloseIcon} from "@chakra-ui/icons"
 
 const Header = (props) => {
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
+  const notification = useSelector(state => state.show.notification)
+  const show = useSelector((state )=> state.show.show)
+  const dispatch = useDispatch()
 
 const router = useRouter();
 
@@ -36,17 +43,20 @@ const homeHandler = () => {
 
   
     const showHandler = () => {
-      setShow(prev => !prev)
+      // setShow(prev => !prev)
+      dispatch(worksActions.showHambugger())
     };
+    
 
 
   return (
     <AnimatePresence>
-    <Box as={motion.div}    initial= {{opacity: 0, y: 15}}
+    <motion.div initial= {{opacity: 0, y: 15}}
     animate={{opacity: 1, y: 0}}
     exit={{opacity: 0, y: 15}}
     transition={{delay: 0.08, duration: 0.3}}>
-    <Box as="header" display={"flex"} alignItems={"center"} justifyContent={"space-between"} margin={{base: "1.06rem 1.31rem", md: "2rem", lg: "2rem 5.34rem "}} >
+       {notification && <Notification title={notification.title} status={notification.status} message={notification.message} />}
+    <Box as="header" display={"flex"} alignItems={"center"} justifyContent={"space-between"} margin={{base: "1.06rem 1.31rem", md: "2rem", lg: "2rem 9.34rem "}} >
       <Box maxH={"10rem"} maxW={"3rem"}>
             <Image onClick={homeHandler} src="/icons/logo.png" alt="sun oil & gas" width={"50"} height={"50"} w={{base: "5rem"}} h={{base: "6rem"}} />
             </Box>
@@ -61,7 +71,7 @@ const homeHandler = () => {
              animate={{opacity: 1, x: 0}}
              transition={{delay: 0.08, duration: 0.5}}
             >
-              <ListItem borderBottom={"1px solid"} p={"0.5rem 2rem"}><button onClick={showHandler}>Cancel</button></ListItem>
+              <ListItem borderBottom={"1px solid"} p={"0.5rem 2rem"} display={"flex"} bg={"transparent"} justifyContent={"flex-end"} ><CloseIcon onClick={showHandler} w={5} h={5} /></ListItem>
               <ListItem borderBottom={"1px solid"} p={"0.5rem 2rem"}><Link href={"/"}>Home</Link></ListItem>
               <ListItem borderBottom={"1px solid"} p={"0.5rem 2rem"}><Link href={"/media"}>Our Works</Link></ListItem>
               <ListItem borderBottom={"1px solid"} p={"0.5rem 2rem"}><Link href={"/#contact"}>Contact Us</Link></ListItem>
@@ -71,7 +81,7 @@ const homeHandler = () => {
         
     </Box>
         <main>{props.children}</main>
-    </Box>
+    </motion.div>
     </AnimatePresence>
   )
 }

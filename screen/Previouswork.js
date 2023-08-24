@@ -22,7 +22,7 @@ const Previouswork = () => {
     
   return (
     <Box>
-        <Heading textAlign={"center"} color={"#111010"} fontSize={{base: "1.75rem", md: "3rem"}} fontStyle={"normal"} lineHeight={"normal"} mt={{md: "5rem"}} fontWeight={600}>Our Previous Works</Heading>
+        <Heading textAlign={"center"} color={"#111010"} fontSize={{base: "1.75rem", md: "3rem"}} fontStyle={"normal"} lineHeight={"normal"} mt={{base: "4rem",md: "5rem"}} fontWeight={600}>Our Previous Works</Heading>
         <Box as={motion.div} whileTap={{cursor: "grabbing"}} cursor={"grab"} overflow={"hidden"} ref={carousel}>
             <Box as={motion.div}  drag="x" dragConstraints={{right: 0, left: -width}} display={"flex"}>
             {dummyImages.map( (image) => {

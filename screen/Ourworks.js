@@ -1,40 +1,10 @@
 
-
-import { OurWorks} from '@/helper/helperApi'
 import { Box, SimpleGrid, Image, Text, Heading } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react';
 import { Link } from '@chakra-ui/next-js';
 
 
-const Ourworks = () => {
-  const [savedImage, setSavedImage] = useState([])
-    const services = OurWorks()
+const Ourworks = ({savedImage}) => {
 
-    const sendRequest = async () => {
-         
-    try {
-      const response = await fetch("https://sun-gas.onrender.com/api/our-works")
-     
-      if (!response.ok) {
-        throw new Error("Something went wrong")
-      }
-      const data = await response.json();
-      if (!data || !data.images) {
-        console.log("wait")
-      }
-      setSavedImage(data.images)
-    } catch(error) {
-      console.log(error.message)
-    }
-    }; 
-
-    useEffect( () => {
-      sendRequest()
-    }, []);
-   if (!savedImage) {
-    console.log("yesss")
-   }
-    console.log(savedImage)
   return (
     <Box mb={"4rem"}>
       <Heading m={{base: "4rem 0", md: "4rem 3rem", lg: "4rem 9rem"}} textAlign={{base: "center", md: "start"}} whiteSpace={"nowrap"}>Our Previous Works</Heading>
