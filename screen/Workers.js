@@ -1,5 +1,6 @@
 import {Box, chakra, Heading, Text, Button, Image} from "@chakra-ui/react"
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 import React from 'react'
 
@@ -17,7 +18,7 @@ const Workers = () => {
                      Partner with us for your gas needs and experience excellence in every molecule.
                 </Text>
             </Box>
-            <Button cursor={"pointer"} background={"black"}  _hover={{ bg: 'gainsboro', color: "black" }} boxShadow={"0px 2px 7px 0px rgba(5, 50, 131, 0.52)"} color={"rgba(255, 255, 255, 1)"} padding={{base: "0.4rem 1rem", md: "0.7rem 3rem"}} borderRadius={"0.25rem"}>Contact Us</Button>
+            <Button cursor={"pointer"} background={"black"}  _hover={{ bg: 'gainsboro', color: "black" }} boxShadow={"0px 2px 7px 0px rgba(5, 50, 131, 0.52)"} color={"rgba(255, 255, 255, 1)"} padding={{base: "0.4rem 1rem", md: "0.7rem 3rem"}} borderRadius={"0.25rem"}><Link href={"/#contact"}>Contact Us</Link></Button>
         </Box>
         <Box display={{base: "none", lg: "block"}} width={"50%"}>
         <motion.div initial={{opacity: 0}} animate={{y: [0,-40, 0], opacity: 1}} transition={{delay: 0.4, duration: 3}}><Image src="/icons/elipse2.png" alt="Elipse" width={"100"}  height={"70"} position={"absolute"} top={"-10px"} right={"230px"}  /></motion.div>

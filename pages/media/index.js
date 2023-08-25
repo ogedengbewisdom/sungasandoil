@@ -30,7 +30,7 @@ const MediaPage = () => {
         throw new Error('Something went wrong')
       }
       const data = await response.json()
-      console.log(data)
+  
       if (!data || !data.images) {
         dispatch(
           worksActions.showNotification({
@@ -66,18 +66,27 @@ const MediaPage = () => {
     }
   }
 
-  if (!savedImage || savedImage.length === 0) {
-   return <Fragment>
-    <NoImage>
-      <p>No image please contact the admin to add image and see the beauty of our business</p>
-      <Button onClick={homeHandler} cursor={"pointer"} background={"black"}  _hover={{ bg: 'gainsboro', color: "black" }} boxShadow={"0px 2px 7px 0px rgba(5, 50, 131, 0.52)"} color={"rgba(255, 255, 255, 1)"} padding={{base: "0.4rem 1rem", md: "0.7rem 3rem"}} borderRadius={"0.25rem"}>Home</Button>
-    </NoImage>
-   </Fragment>
-  }
-
   useEffect(() => {
     sendRequest()
   }, [])
+
+  
+  if (savedImage.length === 0) {
+    return <Fragment>
+     <NoImage>
+       <p>Loading...</p>
+       <Button onClick={homeHandler} cursor={"pointer"} background={"black"}  _hover={{ bg: 'gainsboro', color: "black" }} boxShadow={"0px 2px 7px 0px rgba(5, 50, 131, 0.52)"} color={"rgba(255, 255, 255, 1)"} padding={{base: "0.4rem 1rem", md: "0.7rem 3rem"}} borderRadius={"0.25rem"}>Home</Button>
+     </NoImage>
+    </Fragment>
+   }
+
+   if (!savedImage) {
+    return <NoImage>
+    <p>No image please contact the admin to add image and see the beauty of our business</p>
+    <Button onClick={homeHandler} cursor={"pointer"} background={"black"}  _hover={{ bg: 'gainsboro', color: "black" }} boxShadow={"0px 2px 7px 0px rgba(5, 50, 131, 0.52)"} color={"rgba(255, 255, 255, 1)"} padding={{base: "0.4rem 1rem", md: "0.7rem 3rem"}} borderRadius={"0.25rem"}>Home</Button>
+  </NoImage>
+   }
+ 
 
   return <Ourworks savedImage={savedImage} />
 }
