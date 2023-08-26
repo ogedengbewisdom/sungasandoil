@@ -3,12 +3,13 @@ import Ourworks from '@/screen/Ourworks'
 import { worksActions } from '@/store/workslice'
 import { useRouter } from 'next/router'
 import React, { useState, useEffect, Fragment } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '@chakra-ui/react'
 
 const MediaPage = () => {
   const [savedImage, setSavedImage] = useState([]);
   const dispatch = useDispatch();
+  const notification = useSelector(state => state.show.notification)
   const router = useRouter();
   const homeHandler = () => {
     router.push("/")
@@ -71,20 +72,13 @@ const MediaPage = () => {
   }, [])
 
   
-  if (savedImage.length === 0) {
+  if (!savedImage || savedImage.length === 0) {
     return <Fragment>
-     <NoImage>
-       <p>Loading...</p>
+     {!notification && <NoImage>
+       <p>No image please contact the admin to add image and see the beauty of our business</p>
        <Button onClick={homeHandler} cursor={"pointer"} background={"black"}  _hover={{ bg: 'gainsboro', color: "black" }} boxShadow={"0px 2px 7px 0px rgba(5, 50, 131, 0.52)"} color={"rgba(255, 255, 255, 1)"} padding={{base: "0.4rem 1rem", md: "0.7rem 3rem"}} borderRadius={"0.25rem"}>Home</Button>
-     </NoImage>
+     </NoImage>}
     </Fragment>
-   }
-
-   if (!savedImage) {
-    return <NoImage>
-    <p>No image please contact the admin to add image and see the beauty of our business</p>
-    <Button onClick={homeHandler} cursor={"pointer"} background={"black"}  _hover={{ bg: 'gainsboro', color: "black" }} boxShadow={"0px 2px 7px 0px rgba(5, 50, 131, 0.52)"} color={"rgba(255, 255, 255, 1)"} padding={{base: "0.4rem 1rem", md: "0.7rem 3rem"}} borderRadius={"0.25rem"}>Home</Button>
-  </NoImage>
    }
  
 

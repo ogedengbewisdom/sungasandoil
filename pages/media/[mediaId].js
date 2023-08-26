@@ -1,9 +1,7 @@
-import { eventById } from "@/helper/helperApi";
 import EventDetail from "@/screen/EventDetail";
 import { worksActions } from "@/store/workslice";
-import { Heading, } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useState, useEffect, Fragment } from "react";
+import { Fragment } from "react";
 import { useDispatch } from "react-redux";
 
 
@@ -55,7 +53,7 @@ const MediaDetailPage = ({event}) => {
 
 
 export const getStaticProps = async (context) => {
-    let loading = "pending"
+   
     const { params } = context;
     const id = params.mediaId;
     const response = await fetch(`https://sun-gas.onrender.com/api/our-works/${id}`);
@@ -65,7 +63,7 @@ export const getStaticProps = async (context) => {
             notFound: true
         }
     }
-    loading = "success"
+
     return {
         props: {
             event: resData.images
