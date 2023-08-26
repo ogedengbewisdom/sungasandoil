@@ -1,9 +1,7 @@
-import { eventById } from "@/helper/helperApi";
 import EventDetail from "@/screen/EventDetail";
 import { worksActions } from "@/store/workslice";
-import { Heading, } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useState, useEffect, Fragment } from "react";
+import { Fragment } from "react";
 import { useDispatch } from "react-redux";
 
 
@@ -12,7 +10,7 @@ const MediaDetailPage = ({event}) => {
 
     const router = useRouter();
     const mediaId = router.query.mediaId;
-  
+
     const deleteHandler = async () => {
         dispatch(worksActions.showNotification({
             title: "Deleting...",
@@ -55,6 +53,7 @@ const MediaDetailPage = ({event}) => {
 
 
 export const getStaticProps = async (context) => {
+   
     const { params } = context;
     const id = params.mediaId;
     const response = await fetch(`https://sun-gas.onrender.com/api/our-works/${id}`);
@@ -64,7 +63,7 @@ export const getStaticProps = async (context) => {
             notFound: true
         }
     }
-    
+
     return {
         props: {
             event: resData.images
@@ -74,6 +73,7 @@ export const getStaticProps = async (context) => {
 };
 
 export const getStaticPaths = async () => {
+   
     const response =  await fetch(`https://sun-gas.onrender.com/api/our-works`);
     const resData = await response.json();
     const paths  = resData.images.map(item => ({params: {mediaId: `${item.id}`}}));

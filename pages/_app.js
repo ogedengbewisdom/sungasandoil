@@ -1,5 +1,5 @@
 "use client"
-
+import '@/styles/globals.css'
 import Header from "@/screen/Header";
 import store from "@/store";
 import {ChakraProvider, CSSReset} from "@chakra-ui/react";

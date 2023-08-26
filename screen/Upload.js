@@ -1,5 +1,3 @@
-
-
 import { worksActions } from '@/store/workslice';
 import { Box, FormControl, FormLabel, Input, Stack, Textarea, Button } from '@chakra-ui/react'
 import { useRouter } from 'next/router';
@@ -29,10 +27,8 @@ const Upload = () => {
       message: "uploading images please wait"
     }))
     const formData = new FormData();
-    console.log("Form", formData);
     formData.append("image", data.image[0]); 
     formData.append("description", data.description);
-    console.log("checkout",formData)
     try {
       const response = await fetch("https://sun-gas.onrender.com/api/upload", {
         method: "POST",
