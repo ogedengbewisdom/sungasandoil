@@ -30,7 +30,6 @@ const AuthForm = () => {
           "Content-Type": "application/json"
         },
       })
-      console.log(response)
       if (!response.ok) {
         throw new Error("Something went wrong")
       }
@@ -57,8 +56,8 @@ const AuthForm = () => {
         <form noValidate onSubmit={handleSubmit(submitAuthenticationHandler)}>
             <Stack spacing={3} display={"flex"} flexDir={"column"} alignItems={"center"} justifyContent={"center"}>
             <FormControl display={"flex"} flexDir={"column"} width={"100%"} marginTop={"1.7rem"}>
-                <FormLabel htmlFor='name'>User name</FormLabel>
-                <Input  type="text" id="username" placeholder="Enter Admin ID" 
+                <FormLabel htmlFor='username'>User name</FormLabel>
+                <Input  type="text" id="username" placeholder="Enter Admin ID" autoComplete="username" 
                 {...register("username", {
                   required: {
                     value: true,
@@ -71,7 +70,7 @@ const AuthForm = () => {
 
             <FormControl display={"flex"} flexDir={"column"} width={"100%"} marginTop={"1.7rem"}>
                 <FormLabel htmlFor='password'>Password</FormLabel>
-                <Input  type="password" id="password" placeholder="Password" 
+                <Input  type="password" id="password" placeholder="Password" autoComplete="password"
                   {...register("password", {
                     required: {
                       value: true,
