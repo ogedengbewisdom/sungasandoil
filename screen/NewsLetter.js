@@ -64,7 +64,7 @@ const NewsLetter = () => {
         <form onSubmit={handleSubmit(submiHandler)}>
             <Stack spacing={3} display={"flex"} flexDir={"column"} alignItems={"center"} justifyContent={"center"}>
             <FormControl display={"flex"} flexDir={"column"} width={"100%"} marginTop={"1.7rem"}>
-                <Input type="text" id='name'  placeholder='Your name' {...register("name", {
+                <Input type="text" id='name'  placeholder='Your name' autoComplete="name" {...register("name", {
                   required: {
                     value: true,
                     message: "Your name is required"
@@ -72,7 +72,7 @@ const NewsLetter = () => {
                 })}  />
             </FormControl>
             <FormControl display={"flex"} flexDir={"column"} width={"100%"} marginTop={"1.7rem"}>
-                <Input type="email" id='email' placeholder='Your email' {...register("email", {
+                <Input type="email" id='email' placeholder='Your email' autoComplete="email" {...register("email", {
                   required: {
                     value: true,
                     message: "Your email is required"
@@ -80,7 +80,7 @@ const NewsLetter = () => {
                 })} />
             </FormControl>
             <FormControl display={"flex"} flexDir={"column"} width={"100%"} marginTop={"1.7rem"}>
-               <Textarea  placeholder='How can we help' id="message" {...register("message", {
+               <Textarea  placeholder='How can we help' id="message" autoComplete="message" {...register("message", {
                   required: {
                     value: true,
                     message: "Your message is required"
