@@ -72,7 +72,7 @@ const Upload = () => {
             <Stack spacing={3} display={"flex"} flexDir={"column"} alignItems={"center"} justifyContent={"center"}>
             <FormControl display={"flex"} flexDir={"column"} width={"100%"} marginTop={"1.7rem"}>
                 <FormLabel htmlFor='image'>Select Image</FormLabel>
-                <Input type="file" id="image" placeholder='Select an Image to upload' 
+                <Input type="file" id="image" placeholder='Select an Image to upload' autoComplete="image" 
                 {...register("image", {
                   required: {
                     value: true,
@@ -90,7 +90,7 @@ const Upload = () => {
 
             <FormControl display={"flex"} flexDir={"column"} width={"100%"} marginTop={"1.7rem"}>
                 <FormLabel htmlFor='description'>Description</FormLabel>
-                <Textarea id="description" placeholder='How can we help' {...register("description", {
+                <Textarea id="description" placeholder='How can we help' autoComplete="description" {...register("description", {
                   required: {
                     value: true,
                     message: "Field must not be empty"
