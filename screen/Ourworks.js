@@ -1,6 +1,7 @@
 
 import { Box, SimpleGrid, Image, Text, Heading } from '@chakra-ui/react'
 import { Link } from '@chakra-ui/next-js';
+import React from 'react';
 
 
 const Ourworks = ({savedImage}) => {
@@ -18,4 +19,4 @@ const Ourworks = ({savedImage}) => {
   )
 }
 
-export default Ourworks
+export default React.memo(Ourworks)

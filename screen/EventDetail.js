@@ -1,10 +1,15 @@
 
-
 import React from 'react'
 import { Button, Image, CardFooter, Text, Card, CardBody } from '@chakra-ui/react'
+import NoImage from './Nomedia'
 
 const EventDetail = ({event, onDelete}) => {
 
+  if (!event) {
+    return <NoImage>
+      <p>Loading</p>
+    </NoImage>
+  }
 
   return (
 <Card maxW={{base: "sm", md: "md", lg:'lg'}} display={"flex"} margin={"5rem auto"}>
@@ -33,4 +38,4 @@ const EventDetail = ({event, onDelete}) => {
   )
 }
 
-export default EventDetail
+export default React.memo(EventDetail)

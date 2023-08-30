@@ -1,10 +1,10 @@
-import NoImage from '@/screen/Nomedia'
-import Ourworks from '@/screen/Ourworks'
-import { worksActions } from '@/store/workslice'
-import { useRouter } from 'next/router'
-import React, { useState, useEffect, Fragment } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Button } from '@chakra-ui/react'
+import NoImage from '@/screen/Nomedia';
+import Ourworks from '@/screen/Ourworks';
+import { worksActions } from '@/store/workslice';
+import { useRouter } from 'next/router';
+import React, { useState, useEffect, Fragment } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button } from '@chakra-ui/react';
 
 const MediaPage = () => {
   const [savedImage, setSavedImage] = useState([]);
@@ -85,4 +85,4 @@ const MediaPage = () => {
   return <Ourworks savedImage={savedImage} />
 }
 
-export default MediaPage
+export default React.memo(MediaPage)
