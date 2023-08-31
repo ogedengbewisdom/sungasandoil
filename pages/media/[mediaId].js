@@ -1,4 +1,4 @@
-import EventDetail from "@/screen/EventDetail";
+import EventDetail from "@/screen/MediaDetail";
 import { worksActions } from "@/store/workslice";
 import { useRouter } from "next/router";
 import React, { Fragment, useEffect, useState } from "react";
