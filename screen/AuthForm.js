@@ -1,13 +1,18 @@
 
 
+import { worksActions } from '@/store/workslice';
 import { FormControl, FormLabel, Input, Box, Heading, Button, Stack } from '@chakra-ui/react'
 import { useRouter } from 'next/router';
 import React, {useEffect} from 'react';
 import { useForm} from "react-hook-form";
+import { useDispatch } from 'react-redux';
 
 const AuthForm = () => {
 
   const router = useRouter()
+  const dispatch = useDispatch()
+
+
 
   const form = useForm({
     defaultValues: {
@@ -21,6 +26,11 @@ const AuthForm = () => {
 
   const submitAuthenticationHandler = async(data) => {
     // console.log(data)
+    dispatch(worksActions.showNotification({
+      title: "Logging",
+      status: "pending",
+      message: "Admin validation please wait..."
+    }))
    
     try {
       const response = await fetch("https://sun-gas.onrender.com/api/login", {
@@ -33,14 +43,31 @@ const AuthForm = () => {
       if (!response.ok) {
         throw new Error("Something went wrong")
       }
-      // const data = await response.json()
-      // console.log(data)
+      const resData = await response.json()
+      const token = resData.admin._id
+      localStorage.setItem("token", token)
+      router.push("/upload")
+      // dispatch(worksActions.setAuthentication(token))
+
+      dispatch(worksActions.showNotification({
+        title: "Success",
+        status: "success",
+        message: "Logged in successfully"
+      }))
+      setTimeout(() => {
+        dispatch(worksActions.clearNotification()) // Clear the notification after 5 seconds
+      }, 5000)
+
     } catch(error) {
-      // console.log(error.message)
+      dispatch(worksActions.showNotification({
+        title: "Failed",
+        status: "error",
+        message: "Login failed"
+      }))
     }
 
-
-    router.push("/upload")
+  
+    // router.push("/upload")
 
   }
 
