@@ -4,7 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     items: [],
     show: false,
-    notification: null
+    notification: null,
+    isAuthenticated: false
 }
 
 const workSlice = createSlice({
@@ -26,6 +27,9 @@ const workSlice = createSlice({
         },
         clearNotification(state, action) {
             state.notification = null
+        },
+        setAuthentication(state, action) {
+            state.isAuthenticated = action.payload
         }
 
     }
