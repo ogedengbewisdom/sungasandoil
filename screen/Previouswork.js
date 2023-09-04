@@ -21,7 +21,7 @@ const Previouswork = () => {
     };
     
   return (
-    <Box>
+    <Box as="article">
         <Heading textAlign={"center"} color={"#111010"} fontSize={{base: "1.75rem", md: "3rem"}} fontStyle={"normal"} lineHeight={"normal"} mt={{base: "4rem",md: "5rem"}} fontWeight={600}>Our Previous Works</Heading>
         <Box as={motion.div} whileTap={{cursor: "grabbing"}} cursor={"grab"} overflow={"hidden"} ref={carousel}>
             <Box as={motion.div}  drag="x" dragConstraints={{right: 0, left: -width}} display={"flex"}>
@@ -44,4 +44,4 @@ const Previouswork = () => {
 }
 
 
-export default Previouswork;
+export default React.memo(Previouswork);

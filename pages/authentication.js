@@ -1,8 +1,8 @@
 import AuthForm from "@/screen/AuthForm";
-
+import React from "react";
 
 const AuthenticationPage = () => {
     return <AuthForm />
 };
 
-export default AuthenticationPage;
+export default React.memo(AuthenticationPage);

@@ -6,10 +6,11 @@ import About from '@/screen/About';
 import Previouswork from '@/screen/Previouswork';
 import Contact from '@/screen/Contact';
 import NewsLetter from '@/screen/NewsLetter';
+import React from 'react';
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+ const Homes = () => {
  
   return (
     <>
@@ -31,3 +32,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Homes

@@ -57,9 +57,9 @@ const NewsLetter = () => {
     };
     
   return (
-    <Box width={"80%"} maxW={"40rem"} margin={"4rem auto"}>
+    <Box width={"80%"} maxW={"40rem"} margin={"4rem auto"} as='section'>
         <Heading fontSize={"1.2rem"} fontStyle={"normal"} fontWeight={600} lineHeight={"137.5%"} mb={"2.88rem"} textAlign={"center"}>You can message our team directly using this form below and get response within 24hours.</Heading>
-    <Box mt={"2.88rem"} boxShadow={"0px 4px 4px 0px rgba(0, 0, 0, 0.25)"} padding={"3.71875rem 1.5625rem 3.65625rem 1.5625rem"}>
+    <Box mt={"2.88rem"} boxShadow={"0px 4px 4px 0px rgba(0, 0, 0, 0.25)"} padding={"3.71875rem 1.5625rem 3.65625rem 1.5625rem"} as='main'>
         <Heading color="#000" fontSize="1.125rem" fontWeight="500" lineHeight={"120%"} >Send us an Email</Heading>
         <form onSubmit={handleSubmit(submiHandler)}>
             <Stack spacing={3} display={"flex"} flexDir={"column"} alignItems={"center"} justifyContent={"center"}>
@@ -95,4 +95,4 @@ const NewsLetter = () => {
   )
 }
 
-export default NewsLetter
+export default React.memo(NewsLetter)

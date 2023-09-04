@@ -1,6 +1,6 @@
 'use client'
-import React, {Fragment, useEffect, useState} from 'react';
-import {Box, Text, Button, chakra, List, ListItem, Image} from "@chakra-ui/react"
+import React, { useEffect, useState} from 'react';
+import {Box, Button, List, ListItem, Image} from "@chakra-ui/react"
 import {motion, AnimatePresence} from "framer-motion"
 import { useRouter } from 'next/router';
 import { Link } from '@chakra-ui/next-js';
@@ -59,7 +59,7 @@ const homeHandler = () => {
 
   return (
     <AnimatePresence>
-    <motion.div initial= {{opacity: 0, y: 15}}
+    <motion.header initial= {{opacity: 0, y: 15}}
     animate={{opacity: 1, y: 0}}
     exit={{opacity: 0, y: 15}}
     transition={{delay: 0.08, duration: 0.3}}>
@@ -87,15 +87,15 @@ const homeHandler = () => {
               <ListItem borderBottom={"1px solid"} p={"0.5rem 2rem"}><Link href={"/#contact"}>Contact Us</Link></ListItem>
               {auth && <ListItem borderBottom={"1px solid"}  p={"0.5rem 2rem"}><Link href={"/upload"}>Upload</Link></ListItem>}
               {!auth && <ListItem  p={"0.5rem 2rem"}><Link href={"/authentication"}>Admin</Link></ListItem>}
-              {auth && <ListItem onClick={logoutHandler} p={"0.5rem 2rem"}>Logout</ListItem>}
+              {auth && <ListItem onClick={logoutHandler} p={"0.5rem 2rem"} cursor="pointer">Logout</ListItem>}
             </List>}
             {!show && <Image onClick={showHandler} display={{base: "block", md: "none"}} src="/images/icons/Menu.png" alt="hamburgermenu" width={39} height={50} />}
         
     </Box>
         <main>{props.children}</main>
-    </motion.div>
+    </motion.header>
     </AnimatePresence>
   )
 }
 
-export default Header;
+export default React.memo(Header);

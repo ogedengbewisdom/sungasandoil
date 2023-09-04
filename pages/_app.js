@@ -45,11 +45,3 @@ export default function App({ Component, pageProps }) {
     </Provider>
     </ChakraProvider>
 }
-
-// theme={extendTheme({
-//   fonts: {
-//     Heading: `Clash Display`,
-//     body: "Clash Display",
-//     Text: `"Urbanist"`
-//   }
-// })}

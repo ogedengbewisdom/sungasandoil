@@ -25,7 +25,7 @@ const AuthForm = () => {
   const {errors, isSubmitted, isSubmitSuccessful} = formState;
 
   const submitAuthenticationHandler = async(data) => {
-    // console.log(data)
+
     dispatch(worksActions.showNotification({
       title: "Logging",
       status: "pending",
@@ -115,4 +115,4 @@ const AuthForm = () => {
   )
 }
 
-export default AuthForm
+export default React.memo(AuthForm)

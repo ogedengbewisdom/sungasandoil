@@ -5,6 +5,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 
+
 const MediaDetailPage = () => {
     const dispatch = useDispatch()
     const [event, setEvent] = useState();
@@ -46,16 +47,15 @@ const MediaDetailPage = () => {
                 dispatch(worksActions.clearNotification()) // Assuming you have a clearNotification action
               }, 5000) // Clear the notification after 5 seconds
         } catch(error) {
+            // Handle error state
             dispatch(worksActions.showNotification({
                 title: "Failed",
                 status: "error",
                 message: "Failed to fetch media please try again"
             }))
-            // Handle error state
+      
         }
     };
-
-    // Rest of your component code
 
     const deleteHandler = async () => {
         dispatch(worksActions.showNotification({
@@ -90,10 +90,6 @@ const MediaDetailPage = () => {
         }
     }
 
-    // useEffect(() => {
-    //     sendRequest()
-    // }, [])
-
     return (
         <Fragment>
             <EventDetail event={event} onDelete={deleteHandler} />
@@ -101,37 +97,5 @@ const MediaDetailPage = () => {
     )
 };
 
-
-// export const getStaticProps = async (context) => {
-   
-//     const { params } = context;
-//     const id = params.mediaId;
-//     const response = await fetch(`https://sun-gas.onrender.com/api/our-works/${id}`);
-//     const resData = await response.json();
-//     if (!resData) {
-//         return {
-//             notFound: true
-//         }
-//     }
-
-//     return {
-//         props: {
-//             event: resData.images
-//         },
-//         revalidate: 10
-//     }
-// };
-
-// export const getStaticPaths = async () => {
-   
-//     const response =  await fetch(`https://sun-gas.onrender.com/api/our-works`);
-//     const resData = await response.json();
-//     const paths  = resData.images.map(item => ({params: {mediaId: `${item.id}`}}));
-
-//     return {
-//         paths: paths,
-//         fallback: false
-//     }
-// };
 
 export default React.memo(MediaDetailPage);

@@ -54,7 +54,7 @@ const MediaPage = () => {
         )
         setTimeout(() => {
           dispatch(worksActions.clearNotification()) // Clear the notification after 5 seconds
-        }, 5000)
+        }, 1000)
       }
     } catch (error) {
       dispatch(

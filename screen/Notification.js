@@ -1,4 +1,5 @@
 import classes from './Notification.module.css';
+import React from 'react';
 
 const Notification = (props) => {
   let specialClasses = '';
@@ -20,4 +21,4 @@ const Notification = (props) => {
   );
 };
 
-export default Notification;
+export default React.memo(Notification);
