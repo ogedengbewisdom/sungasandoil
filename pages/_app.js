@@ -40,8 +40,9 @@ export default function App({ Component, pageProps }) {
      <CSSReset />
       <GlobalStyles />
       <Provider store={store}>
-    <Header />
+    <Header>
     <Component {...pageProps} />
+    </Header>
     </Provider>
     </ChakraProvider>
 }
