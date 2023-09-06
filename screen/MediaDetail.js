@@ -1,17 +1,30 @@
 
-import React from 'react'
-import { Button, Image, CardFooter, Text, Card, CardBody } from '@chakra-ui/react'
-import NoImage from './Nomedia'
-import { getAuthToken } from '@/util/authUtil'
+import React, { Fragment } from 'react';
+import { Button, Image, CardFooter, Text, Card, CardBody } from '@chakra-ui/react';
+import NoImage from './Nomedia';
+import { getAuthToken } from '@/util/authUtil';
+import {useSelector} from "react-redux";
+import { useRouter } from 'next/router';
 
-const EventDetail = ({event, onDelete}) => {
+const MediaDetail = ({media, onDelete}) => {
 
-  const getToken = getAuthToken()
+  const notification = useSelector(state => state.show.notification);
+  const router = useRouter();
+  const getToken = getAuthToken();
 
-  if (!event) {
-    return <NoImage>
-      <p>Loading</p>
-    </NoImage>
+  const homeHandler = () => {
+    router.push("/")
+  };
+
+  if (!media) {
+    return (
+      <Fragment>
+          {!notification && <NoImage>
+          <p>404 - page not found</p>
+          <Button onClick={homeHandler} cursor={"pointer"} background={"black"}  _hover={{ bg: 'gainsboro', color: "black" }} mt="1rem" boxShadow={"0px 2px 7px 0px rgba(5, 50, 131, 0.52)"} color={"rgba(255, 255, 255, 1)"} padding={{base: "0.4rem 1rem", md: "0.7rem 3rem"}} borderRadius={"0.25rem"}>Home</Button>
+          </NoImage>}
+      </Fragment>
+    )
   }
 
   return (
@@ -19,14 +32,14 @@ const EventDetail = ({event, onDelete}) => {
 
 <Image
   objectFit='cover'
-  src={event.image}
-  alt={event.alt}
+  src={media.image}
+  alt={media.alt}
   borderRadius="1rem"
 />
 
 <CardBody as="article">
       <Text>
-        {event.description}
+        {media.description}
       </Text>
 </CardBody>
 
@@ -41,4 +54,4 @@ const EventDetail = ({event, onDelete}) => {
   )
 }
 
-export default React.memo(EventDetail)
+export default React.memo(MediaDetail)
