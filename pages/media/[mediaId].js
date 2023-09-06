@@ -1,4 +1,4 @@
-import EventDetail from "@/screen/MediaDetail";
+import MediaDetail from "@/screen/MediaDetail";
 import { worksActions } from "@/store/workslice";
 import { useRouter } from "next/router";
 import React, { Fragment, useEffect, useState } from "react";
@@ -8,10 +8,10 @@ import { useDispatch } from "react-redux";
 
 const MediaDetailPage = () => {
     const dispatch = useDispatch()
-    const [event, setEvent] = useState();
+    const [media, setMedia] = useState();
     const router = useRouter();
     const mediaId = router.query.mediaId;
-    
+
     useEffect(() => {
         if (mediaId) {
             sendRequest();
@@ -26,7 +26,7 @@ const MediaDetailPage = () => {
         }))
         try {
             const response = await fetch(`https://sun-gas.onrender.com/api/our-works/${mediaId}`);
-            if (!response.ok) {
+            if (!response.ok ) {
                 dispatch(worksActions.showNotification({
                     title: "Failed",
                     status: "error",
@@ -37,7 +37,7 @@ const MediaDetailPage = () => {
             if (!resData || resData.length === 0) {
                 // Handle loading state or empty response
             }
-            setEvent(resData.images)
+            setMedia(resData.images)
             dispatch(worksActions.showNotification({
                 title: "Success",
                 status: "success",
@@ -45,7 +45,7 @@ const MediaDetailPage = () => {
             })) 
             setTimeout(() => {
                 dispatch(worksActions.clearNotification()) // Assuming you have a clearNotification action
-              }, 5000) // Clear the notification after 5 seconds
+              }, 500) // Clear the notification after 1 seconds
         } catch(error) {
             // Handle error state
             dispatch(worksActions.showNotification({
@@ -92,7 +92,7 @@ const MediaDetailPage = () => {
 
     return (
         <Fragment>
-            <EventDetail event={event} onDelete={deleteHandler} />
+            <MediaDetail media={media} onDelete={deleteHandler} />
         </Fragment>
     )
 };
