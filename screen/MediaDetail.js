@@ -28,13 +28,14 @@ const MediaDetail = ({media, onDelete}) => {
   }
 
   return (
-<Card maxW={{base: "sm", md: "md", lg:'lg'}} display={"flex"} margin={"5rem auto"} as="section">
+<Card maxW={{base: "sm", md: "md", lg:'lg'}} display={"flex"} margin={"5rem auto"} as="section" borderTopRadius="1rem">
 
 <Image
   objectFit='cover'
   src={media.image}
   alt={media.alt}
-  borderRadius="1rem"
+  borderTopRadius="1rem"
+  height={"450px"}
 />
 
 <CardBody as="article">
