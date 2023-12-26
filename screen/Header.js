@@ -59,12 +59,12 @@ const homeHandler = () => {
 
   return (
     <AnimatePresence>
-    <motion.header initial= {{opacity: 0, y: 15}}
+    <header as={motion.header} key={"root"} initial= {{opacity: 0, y: 15}}
     animate={{opacity: 1, y: 0}}
     exit={{opacity: 0, y: 15}}
     transition={{delay: 0.08, duration: 0.3}}>
        {notification && <Notification title={notification.title} status={notification.status} message={notification.message} />}
-    <Box as="header" display={"flex"} alignItems={"center"} justifyContent={"space-between"} margin={{base: "1.06rem 1.31rem", md: "2rem", lg: "2rem 9.34rem "}} >
+    <Box as="header" display={"flex"} alignItems={"center"} justifyContent={"space-between"} margin={{base: "1.06rem 1.31rem", md: "2rem", lg: "1rem 9.34rem "}} >
       <Box maxH={"10rem"} maxW={"3rem"}>
             <Image onClick={homeHandler} src="/icons/logo.png" alt="sun oil & gas" width={"50"} height={"50"} w={{base: "5rem"}} h={{base: "6rem"}} />
             </Box>
@@ -93,9 +93,9 @@ const homeHandler = () => {
         
     </Box>
         <main>{props.children}</main>
-    </motion.header>
+    </header>
     </AnimatePresence>
   )
 }
 
-export default React.memo(Header);
+export default Header;
