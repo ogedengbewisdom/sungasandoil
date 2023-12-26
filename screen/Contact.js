@@ -7,7 +7,7 @@ const Contact = () => {
     <Box as="section" display={"flex"} justifyContent={"center"} flexDir={"column"} alignItems={"center"} mt={{base: "0.7rem", md: "1.5rem"}}>
         <Heading id="contact">Contact us</Heading>
         
- <SimpleGrid as="address" spacing={4} templateColumns={{base: "1fr", md: "300px 300px 300px"}} mt={{base: "1.4rem", md:"3rem"}}>
+ <SimpleGrid as="address" spacing={4} templateColumns={{base: "1fr",md: "250px 250px 250px", lg: "300px 300px 300px"}} mt={{base: "1.4rem", md:"3rem"}}>
 
         <Card display={"flex"} flexDir={"column"} justifyContent={"center"} alignItems={"center"}>
     <CardHeader>
